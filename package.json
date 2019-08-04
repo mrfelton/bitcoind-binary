@@ -1,0 +1,41 @@
+{
+  "name": "bitcoind-binary",
+  "version": "0.0.1",
+  "description": "Download the latest bitcoind binary",
+  "engines": {
+    "node": ">=6.0.0",
+    "npm": ">=4.0.0"
+  },
+  "scripts": {
+    "clean": "rm -r ./vendor",
+    "install": "scripts/install"
+  },
+  "files": [
+    "scripts",
+    "bin"
+  ],
+  "bin": {
+    "bitcoind": "./bin/bitcoind"
+  },
+  "pre-push": [
+    "lint",
+    "test"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrfelton/bitcoind-binary.git"
+  },
+  "dependencies": {
+    "prebuild-install": "5.3.0"
+  },
+  "keywords": [
+    "bitcoin",
+    "bitcoind"
+  ],
+  "author": "Tom Kirkpatrick <tkp@kirkdesigns.co.uk> (http://www.kirkdesigns.co.uk/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mrfelton/bitcoind-binary/issues"
+  },
+  "homepage": "https://github.com/mrfelton/bitcoind-binary"
+}

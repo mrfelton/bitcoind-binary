@@ -1,0 +1,29 @@
+#!/usr/bin/env node
+
+const path = require("path");
+const { spawn } = require("child_process");
+
+var binPath = path.join(__dirname, "../vendor/bitcoin/bin/bitcoind");
+var args = process.argv.slice(2);
+
+var cp = spawn(binPath, args);
+cp.stdout.pipe(process.stdout);
+cp.stderr.pipe(process.stderr);
+process.stdin.pipe(cp.stdin);
+
+cp.on("error", function(err) {
+  console.error("Error executing bitcoind at", binPath);
+  console.error(err.stack);
+  process.exit(1);
+});
+
+cp.on("exit", function(code) {
+  setTimeout(function() {
+    process.exit(code);
+  }, 20);
+});
+
+process.on("SIGTERM", function() {
+  cp.kill("SIGTERM");
+  process.exit(1);
+});
